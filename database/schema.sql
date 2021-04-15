@@ -5,8 +5,11 @@ CREATE TABLE to_dos
     id int not null
     auto_increment,
 completed varchar
-    (150) NOT NULL,
-uncompleted boolean,
+    (70) NULL,
+uncompleted varchar
+    (50) NULL,
+all_items varchar
+    (80) NULL,
 primary key
     (id)
 );

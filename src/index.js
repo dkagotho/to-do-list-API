@@ -3,7 +3,7 @@ const accessLog = require("@curveball/accesslog").default;
 
 const problem = require("@curveball/problem").default;
 const bodyParser = require("@curveball/bodyparser").default;
-const routes = "./routes";
+const routes = require("./routes");
 
 const app = new Application();
 
