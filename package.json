@@ -25,6 +25,7 @@
     "@curveball/core": "^0.16.2",
     "@curveball/problem": "^0.3.0",
     "@curveball/router": "^0.3.0",
+    "body-parser": "^1.19.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },
