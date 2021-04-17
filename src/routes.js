@@ -8,4 +8,5 @@ module.exports = [
   router("/todo/update", todoController.update),
   router("/todo/delete", todoController.delete),
   router("/todo/add", todoController.add),
+  router("/todo/delete", todoController.delete),
 ];
