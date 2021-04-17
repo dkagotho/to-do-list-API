@@ -16,9 +16,15 @@ const todoController = {
       }
     }
   },
-  delete(ctx) {},
+  delete(ctx) {
+    for (let index = 0; index < task.length; index++) {
+      if (task[index].name === ctx.request.query.name) {
+        task[index].deleted = true;
+        ctx.response.body = task;
+      }
+    }
+  },
   add(ctx) {
-    // task = ["ctx.request.body"];
     task.push({
       name: ctx.request.query.name,
       completed: false,
