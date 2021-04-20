@@ -31,6 +31,9 @@ const todoController = {
     });
     ctx.response.body = task;
   },
+  read(ctx) {
+    ctx.response.body = task;
+  },
 };
 
 module.exports = todoController;
