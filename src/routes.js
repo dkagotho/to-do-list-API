@@ -9,4 +9,6 @@ module.exports = [
   router("/todo/delete", todoController.delete),
   router("/todo/add", todoController.add),
   router("/todo/read", todoController.read),
+  router("/todo/:id", todoController.readOne),
+
 ];
