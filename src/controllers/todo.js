@@ -48,7 +48,14 @@ const todoController = {
         result = element;
       }
     }
-    ctx.response.body = result;
+    ctx.response.body = {
+      result,
+      _link: {
+        self: {
+          href: `/task/${(ctx.params.id, 10)}/taskId`,
+        },
+      },
+    };
   },
 };
 
