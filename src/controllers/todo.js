@@ -50,9 +50,13 @@ const todoController = {
     }
     ctx.response.body = {
       result,
-      _link: {
+      _links: {
         self: {
-          href: `/task/${(ctx.params.id, 10)}/taskId`,
+          href: "http://localhost:8081/todo",
+        },
+        "ea:find": {
+          href: "/todo{?id}",
+          templated: true,
         },
       },
     };
