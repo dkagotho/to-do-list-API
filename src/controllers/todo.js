@@ -7,13 +7,27 @@ lastTaskId = 0;
 const todoController = {
   get(ctx) {
     ctx.response.type = "application/json";
-    ctx.response.body = task;
+    ctx.response.body = {
+      task,
+      _links: {
+        self: {
+          href: "http://localhost:8081/todo",
+        },
+      },
+    };
   },
   update(ctx) {
     for (let index = 0; index < task.length; index++) {
       if (task[index].name === ctx.request.query.name) {
         task[index].completed = true;
-        ctx.response.body = task;
+        ctx.response.body = {
+          task,
+          _links: {
+            self: {
+              href: "http://localhost:8081/todo/update",
+            },
+          },
+        };
       }
     }
   },
@@ -21,21 +35,45 @@ const todoController = {
     for (let index = 0; index < task.length; index++) {
       if (task[index].name === ctx.request.query.name) {
         task[index].deleted = true;
-        ctx.response.body = task;
+        ctx.response.body = {
+          task,
+          _links: {
+            self: {
+              href: "http://localhost:8081/todo/delete",
+            },
+          },
+        };
       }
     }
   },
   add(ctx) {
     //add id to the new task
-    task.push({
-      id: ++lastTaskId,
-      name: ctx.request.query.name,
-      completed: false,
-    });
-    ctx.response.body = task;
+    var taskName = ctx.request.query.name;
+    if (taskName) {
+      task.push({
+        id: ++lastTaskId,
+        name: taskName,
+        completed: false,
+      });
+    }
+    ctx.response.body = {
+      task,
+      _links: {
+        self: {
+          href: "http://localhost:8081/todo/add",
+        },
+      },
+    };
   },
   read(ctx) {
-    ctx.response.body = task;
+    ctx.response.body = {
+      task,
+      _links: {
+        self: {
+          href: "http://localhost:8081/todo/read",
+        },
+      },
+    };
   },
   readOne(ctx) {
     console.log(ctx.params);
@@ -52,11 +90,7 @@ const todoController = {
       result,
       _links: {
         self: {
-          href: "http://localhost:8081/todo",
-        },
-        "ea:find": {
-          href: "/todo{?id}",
-          templated: true,
+          href: `http://localhost:8081/todo/${taskId}`,
         },
       },
     };
