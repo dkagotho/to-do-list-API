@@ -20,30 +20,30 @@ const todoController = {
     for (let index = 0; index < task.length; index++) {
       if (task[index].name === ctx.request.query.name) {
         task[index].completed = true;
-        ctx.response.body = {
-          task,
-          _links: {
-            self: {
-              href: "http://localhost:8081/todo/update",
-            },
-          },
-        };
       }
+      ctx.response.body = {
+        task,
+        _links: {
+          self: {
+            href: "http://localhost:8081/todo/update",
+          },
+        },
+      };
     }
   },
   delete(ctx) {
     for (let index = 0; index < task.length; index++) {
       if (task[index].name === ctx.request.query.name) {
         task[index].deleted = true;
-        ctx.response.body = {
-          task,
-          _links: {
-            self: {
-              href: "http://localhost:8081/todo/delete",
-            },
-          },
-        };
       }
+      ctx.response.body = {
+        task,
+        _links: {
+          self: {
+            href: "http://localhost:8081/todo/delete",
+          },
+        },
+      };
     }
   },
   add(ctx) {
