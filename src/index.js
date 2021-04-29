@@ -4,6 +4,7 @@ const accessLog = require("@curveball/accesslog").default;
 const problem = require("@curveball/problem").default;
 const bodyParser = require("@curveball/bodyparser").default;
 const routes = require("./routes");
+const cors = require("@curveball/cors").default;
 
 const app = new Application();
 
@@ -17,6 +18,8 @@ app.use(problem());
 // The bodyparser middleware is responsible for parsing JSON and url-encoded
 // request bodies, and populate ctx.request.body.
 app.use(bodyParser());
+
+app.use(cors());
 
 app.use(...routes);
 
