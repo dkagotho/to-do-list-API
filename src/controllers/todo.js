@@ -13,7 +13,7 @@ const todoController = {
         self: {
           href: "http://localhost:8081/todo",
         },
-        items: task.map((todoItem) => ({
+        item: task.map((todoItem) => ({
           href: `http://localhost:8081/todo/${todoItem.id}`,
         })),
       },
