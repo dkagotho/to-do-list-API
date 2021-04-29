@@ -8,11 +8,14 @@ const todoController = {
   get(ctx) {
     ctx.response.type = "application/json";
     ctx.response.body = {
-      task,
+      total: task.length,
       _links: {
         self: {
           href: "http://localhost:8081/todo",
         },
+        items: task.map((todoItem) => ({
+          href: `http://localhost:8081/todo/${todoItem.id}`,
+        })),
       },
     };
   },
@@ -87,7 +90,7 @@ const todoController = {
       }
     }
     ctx.response.body = {
-      result,
+      ...result,
       _links: {
         self: {
           href: `http://localhost:8081/todo/${taskId}`,
