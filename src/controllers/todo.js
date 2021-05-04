@@ -20,19 +20,39 @@ const todoController = {
     };
   },
   update(ctx) {
+    const taskId = parseInt(ctx.params.id, 10);
+    let result = {};
     for (let index = 0; index < task.length; index++) {
+      const element = task[index];
+      console.log(task[index]);
+      if (element.id === taskId) {
+        result = element;
+      }
       if (task[index].name === ctx.request.query.name) {
         task[index].completed = true;
       }
-      ctx.response.body = {
-        task,
-        _links: {
-          self: {
-            href: "http://localhost:8081/todo/update",
-          },
-        },
-      };
     }
+    ctx.response.body = {
+      ...task,
+      _links: {
+        self: {
+          href: "http://localhost:8081/todo/update",
+        },
+      },
+    };
+    // for (let index = 0; index < task.length; index++) {
+    //   if (task[index].name === ctx.request.query.name) {
+    //     task[index].completed = true;
+    //   }
+    //   ctx.response.body = {
+    //     task,
+    //     _links: {
+    //       self: {
+    //         href: "http://localhost:8081/todo/update",
+    //       },
+    //     },
+    //   };
+    // }
   },
   delete(ctx) {
     for (let index = 0; index < task.length; index++) {
