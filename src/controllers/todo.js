@@ -20,39 +20,18 @@ const todoController = {
     };
   },
   update(ctx) {
+    console.log(ctx.params);
     const taskId = parseInt(ctx.params.id, 10);
     let result = {};
     for (let index = 0; index < task.length; index++) {
       const element = task[index];
-      console.log(task[index]);
+      console.log(task[index], taskId, element.id === taskId);
+      result = element;
       if (element.id === taskId) {
-        result = element;
-      }
-      if (task[index].name === ctx.request.query.name) {
-        task[index].completed = true;
+        element.completed = true;
       }
     }
-    ctx.response.body = {
-      ...task,
-      _links: {
-        self: {
-          href: "http://localhost:8081/todo/update",
-        },
-      },
-    };
-    // for (let index = 0; index < task.length; index++) {
-    //   if (task[index].name === ctx.request.query.name) {
-    //     task[index].completed = true;
-    //   }
-    //   ctx.response.body = {
-    //     task,
-    //     _links: {
-    //       self: {
-    //         href: "http://localhost:8081/todo/update",
-    //       },
-    //     },
-    //   };
-    // }
+    ctx.response.status = 204;
   },
   delete(ctx) {
     for (let index = 0; index < task.length; index++) {
@@ -71,22 +50,15 @@ const todoController = {
   },
   add(ctx) {
     //add id to the new task
-    var taskName = ctx.request.query.name;
-    if (taskName) {
+    var { name } = ctx.request.body;
+    if (name) {
       task.push({
         id: ++lastTaskId,
-        name: taskName,
+        name: name,
         completed: false,
       });
     }
-    ctx.response.body = {
-      task,
-      _links: {
-        self: {
-          href: "http://localhost:8081/todo/add",
-        },
-      },
-    };
+    ctx.response.status = 204;
   },
   read(ctx) {
     ctx.response.body = {
