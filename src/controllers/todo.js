@@ -51,6 +51,7 @@ const todoController = {
   add(ctx) {
     //add id to the new task
     var { name } = ctx.request.body;
+    console.log("task", name, ctx.request.body);
     if (name) {
       task.push({
         id: ++lastTaskId,
