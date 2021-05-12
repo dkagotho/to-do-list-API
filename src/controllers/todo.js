@@ -22,31 +22,35 @@ const todoController = {
   update(ctx) {
     console.log(ctx.params);
     const taskId = parseInt(ctx.params.id, 10);
+    const taskDeleted = ctx.request.body.deleted;
+    console.log(ctx.request.body.deleted);
+    console.log(ctx.request.body);
+    const taskCompleted = ctx.request.body.completed;
+    let result = {};
+    for (let index = 0; index < task.length; index++) {
+      const element = task[index];
+      // console.log(task[index], taskId, element.id === taskId);
+      result = element;
+      if (element.id === taskId) {
+        element.completed = taskCompleted;
+        element.deleted = taskDeleted;
+      }
+    }
+    ctx.response.status = 204;
+  },
+  delete(ctx) {
+    console.log(ctx.params);
+    const taskId = parseInt(ctx.params.id, 10);
     let result = {};
     for (let index = 0; index < task.length; index++) {
       const element = task[index];
       console.log(task[index], taskId, element.id === taskId);
       result = element;
       if (element.id === taskId) {
-        element.completed = true;
+        element.deleted = true;
       }
     }
     ctx.response.status = 204;
-  },
-  delete(ctx) {
-    for (let index = 0; index < task.length; index++) {
-      if (task[index].name === ctx.request.query.name) {
-        task[index].deleted = true;
-      }
-      ctx.response.body = {
-        task,
-        _links: {
-          self: {
-            href: "http://localhost:8081/todo/delete",
-          },
-        },
-      };
-    }
   },
   add(ctx) {
     //add id to the new task

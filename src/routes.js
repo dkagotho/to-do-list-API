@@ -9,5 +9,8 @@ module.exports = [
   router("/todo/delete", todoController.delete),
   router("/todo/add", todoController.add),
   router("/todo/read", todoController.read),
-  router("/todo/:id").get(todoController.readOne).put(todoController.update),
+  router("/todo/:id")
+    .get(todoController.readOne)
+    .put(todoController.update)
+    .delete(todoController.delete),
 ];
