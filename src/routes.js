@@ -4,7 +4,10 @@ const todoController = require("./controllers/todo");
 
 module.exports = [
   router("/", homeController.get),
-  router("/todo").get(todoController.get).post(todoController.add),
+  router("/todo/")
+    .get(todoController.get)
+    .post(todoController.add)
+    .put(todoController.update),
   router("/todo/update", todoController.update),
   router("/todo/delete", todoController.delete),
   router("/todo/add", todoController.add),
